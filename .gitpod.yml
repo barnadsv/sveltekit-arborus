@@ -1,3 +1,4 @@
+# Para mais detalhes, ver https://www.gitpod.io/docs/references/gitpod-yml
 
 tasks:
   - init: npm install && npm run build
