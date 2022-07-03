@@ -1,12 +1,17 @@
 <script>
-    import { Navbar } from 'konsta/svelte'
+    import { Navbar, NavbarBackLink } from 'konsta/svelte'
     import ProgressBarArborus from './ProgressBarArborus.svelte'
 
     export let progress = 0
     export let title = ''
+    export let voltar = false
 </script>
 
-<Navbar {title} class="sticky top-0"></Navbar>
+<Navbar {title} class="sticky top-0">
+    {#if voltar}
+    <NavbarBackLink slot="left" text="" onClick={() => history.back()} />
+    {/if}
+</Navbar>
 <Navbar slot="subnavbar">
     <div class="flex flex-col w-full items-center justify-center">
         <ProgressBarArborus {progress} />
