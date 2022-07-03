@@ -9,6 +9,6 @@
     
 </script>
   
-<App {theme}>
+<App safeAreas {theme}>
     <slot />
 </App>
