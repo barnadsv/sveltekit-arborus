@@ -10,4 +10,8 @@
         width: 100%;
         height: 100%;
     }
+
+    :global(.artboard-demo) {
+        justify-content: start;
+    }
 </style>
