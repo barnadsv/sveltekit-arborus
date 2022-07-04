@@ -1,3 +1,11 @@
+<script context="module" lang="ts">
+    /** @type {import('./__types/_layout').Load} */
+    export async function load({ session }: any) {
+        const localDarkTheme = session.theme 
+        return { props: { localDarkTheme } }
+    }
+</script>
+
 <script lang="ts">
     import { onMount } from 'svelte'
     import '../app.css'
