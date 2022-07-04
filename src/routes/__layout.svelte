@@ -31,11 +31,15 @@
             if (htmlElement) {
                 htmlElement.classList.add('dark')
                 htmlElement.setAttribute("data-theme", 'dark')
+                document.cookie = `theme=dark;path=/;expires=Fri, 31 Dec 9999 23:59:59 GMT`
+                localDarkTheme = 'dark'
             }
         } else {
             if (htmlElement) {
                 htmlElement.classList.remove('dark')
                 htmlElement.setAttribute("data-theme", 'light')
+                document.cookie = `theme=light;path=/;expires=Fri, 31 Dec 9999 23:59:59 GMT`
+                localDarkTheme = 'light'
             }
         }
     }
@@ -66,6 +70,12 @@
   </script>
 </svelte:head>
   
-<App theme={osTheme} dark={isDark} safeAreas>
+{#if isDark}
+<App theme={osTheme} dark safeAreas>
     <slot />
 </App>
+{:else}
+<App theme={osTheme} safeAreas>
+  <slot />
+</App>
+{/if}

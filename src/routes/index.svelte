@@ -13,7 +13,11 @@
     }
 
     const setSystem = (e: Event) => {
-        themeStore.set({ ...$themeStore, mode: 'system' })
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            themeStore.set({ ...$themeStore, mode: 'dark' })
+        } else {
+            themeStore.set({ ...$themeStore, mode: 'light' })
+        }
     }
 
 </script>
