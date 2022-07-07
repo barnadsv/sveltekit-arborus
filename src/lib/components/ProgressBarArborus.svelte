@@ -1,6 +1,7 @@
 <script>
     import { Progressbar } from 'konsta/svelte'
-    export let progress = 0
+    import { navbarStore } from '$lib/stores/navbarStore'
+    export let progress = $navbarStore.progress
 </script>
 
 <div class="w-full">

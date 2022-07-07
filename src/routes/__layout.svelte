@@ -1,20 +1,22 @@
 <script context="module" lang="ts">
     /** @type {import('./__types/_layout').Load} */
-    export async function load({ session }: any) {
+    export async function load({ session, url: { pathname } }: any) {
         const localDarkTheme = session.theme 
-        return { props: { localDarkTheme } }
+        return { props: { localDarkTheme, pathname } }
     }
 </script>
 
 <script lang="ts">
     import { onMount } from 'svelte'
+    // import PageTransition from '$lib/components/PageTransition.svelte'
     import '../app.css'
     import { App } from 'konsta/svelte'
     import { themeStore } from '$lib/stores/themeStore'
     
     let osTheme: "material" | "ios" | "parent" | undefined = 'ios' // TODO: Detectar o dispositivo e definir o tema aqui, muito provavelmente utilizando store...
 
-    let localDarkTheme: string
+    export let localDarkTheme: string
+    // export let pathname: string
 
     let htmlElement: HTMLElement
     
@@ -78,12 +80,17 @@
   </script>
 </svelte:head>
   
+
 {#if isDark}
 <App theme={osTheme} dark safeAreas>
+  <!-- <PageTransition {pathname}> -->
     <slot />
+  <!-- </PageTransition> -->
 </App>
 {:else}
 <App theme={osTheme} safeAreas>
+  <!-- <PageTransition {pathname}> -->
   <slot />
+<!-- </PageTransition> -->
 </App>
 {/if}
