@@ -7,7 +7,7 @@
 </script> -->
 
 <script lang="ts">
-    import { onMount, afterUpdate } from 'svelte'
+    import { afterUpdate } from 'svelte'
     // import PageTransition from '$lib/components/PageTransition.svelte'
     // import DarkMode from 'svelte-dark-mode'
     import '../app.css'
