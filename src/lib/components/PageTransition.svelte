@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
     import { fly } from 'svelte/transition'
     export let pathname = ''
     const pageTransitionDuration = 500
@@ -9,4 +9,4 @@
         out:fly={{ x: 5, duration: pageTransitionDuration }}>
     <slot />
 </div>
-{/key}
+{/key} -->
