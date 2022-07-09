@@ -1,4 +1,4 @@
 export type Theme = {
     mode: string,
-    os: string
+    os: "material" | "ios" | "parent" | undefined
 }

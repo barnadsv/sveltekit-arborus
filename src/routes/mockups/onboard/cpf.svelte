@@ -1,12 +1,17 @@
 <script lang="ts">
     import { goto } from '$app/navigation'
-    import { Page, Block, List, ListInput, useTheme } from 'konsta/svelte'
-    import NavBarArborus from '$lib/components/NavBarArborus.svelte'
+    import { Block, List, ListInput, useTheme } from 'konsta/svelte'
     import ButtonContinuar from '$lib/components/ButtonContinuar.svelte'
+    import { navbarStore } from '$lib/stores/navbarStore'
+    
+    navbarStore.set({
+        semNavbarArborus: false,
+        temProgress: true,
+        progress: 0.05,
+        title: 'Informações Pessoais',
+        voltar: true
+    })
 
-    let progress = 0.05
-    let title = "Informações Pessoais"
-    let voltar = true
     let theme = ''
 
     let cpf = ''
@@ -67,29 +72,18 @@
 
 </script>
 
-<Page>
-    <div class="mockup-phone">
-        <div class="camera"></div> 
-        <div class="display">
-        <div class="artboard artboard-demo phone-7">
-            <NavBarArborus {title} {progress} {voltar} />
-            <div class="flex flex-col justify-between p-2 h-full w-full">
-                <Block>
-                    <p class="text-2xl mb-2">Informe seu CPF:</p>
-                    <form>
-                        <div class="flex flex-col">
-                            <List {hairlines} inset>
-                                <ListInput type="text" placeholder="" value={cpf} onInput={onCpfChange} {error} />
-                            </List>
-                        </div>
-                    </form>
-                </Block>
-                <div class="flex-1"></div>
-                <div class="mt-auto">
-                    <ButtonContinuar {disabled} {onContinue} />
-                </div>
-            </div>
+<Block>
+    <p class="text-2xl mb-2">Informe seu CPF:</p>
+    <form>
+        <div class="flex flex-col">
+            <List {hairlines} inset>
+                <ListInput type="text" placeholder="" value={cpf} onInput={onCpfChange} {error} />
+            </List>
         </div>
-        </div>
-    </div>
-</Page>
+    </form>
+</Block>
+<div class="flex-1"></div>
+<div class="mt-auto">
+    <ButtonContinuar {disabled} {onContinue} />
+</div>
+

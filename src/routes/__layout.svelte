@@ -1,25 +1,46 @@
-<script context="module" lang="ts">
+<!-- <script context="module" lang="ts">
     /** @type {import('./__types/_layout').Load} */
-    export async function load({ session }: any) {
+    export async function load({ session, url: { pathname } }: any) {
         const localDarkTheme = session.theme 
-        return { props: { localDarkTheme } }
+        return { props: { localDarkTheme, pathname } }
     }
-</script>
+</script> -->
 
 <script lang="ts">
-    import { onMount } from 'svelte'
+    import { afterUpdate } from 'svelte'
+    // import PageTransition from '$lib/components/PageTransition.svelte'
+    // import DarkMode from 'svelte-dark-mode'
     import '../app.css'
     import { App } from 'konsta/svelte'
     import { themeStore } from '$lib/stores/themeStore'
     
-    let osTheme: "material" | "ios" | "parent" | undefined = 'ios' // TODO: Detectar o dispositivo e definir o tema aqui, muito provavelmente utilizando store...
+    // let osTheme: "material" | "ios" | "parent" | undefined = 'ios' // TODO: Detectar o dispositivo e definir o tema aqui, muito provavelmente utilizando store...
+    let osTheme: "material" | "ios" | "parent" | undefined = $themeStore.os // TODO: Detectar o dispositivo e definir o tema aqui, muito provavelmente utilizando store...
 
-    let localDarkTheme: string
+
+    export let localDarkTheme: string
+    // export let pathname: string
 
     let htmlElement: HTMLElement
     
-    onMount(() => {
-        htmlElement = document.firstElementChild as HTMLElement
+    // onMount(() => {
+    //     htmlElement = document.firstElementChild as HTMLElement
+    //     if (!('theme' in localStorage)) {
+    //         themeStore.useLocalStorage()
+    //         if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    //             localDarkTheme = 'dark'
+    //             themeStore.set({ ...$themeStore, mode: 'dark' })
+    //         } else {
+    //             localDarkTheme = 'light'
+    //             themeStore.set({ ...$themeStore, mode: 'light' })
+    //         }
+    //     } else {
+    //         themeStore.useLocalStorage()
+    //     }
+    // })
+
+    afterUpdate(() => {
+      htmlElement = document.firstElementChild as HTMLElement
         if (!('theme' in localStorage)) {
             themeStore.useLocalStorage()
             if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -54,9 +75,13 @@
 
     $: isDark = localDarkTheme === 'dark'
 
+    $: osTheme = $themeStore.os
+
+    // $: document.body.className = localDarkTheme;
+
 </script>
 
-<svelte:head>
+<!-- <svelte:head>
   <script>
     if (!('theme' in localStorage)) {
       if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -76,14 +101,19 @@
       }
     }
   </script>
-</svelte:head>
+</svelte:head> -->
   
+<!-- <DarkMode bind:localDarkTheme /> -->
 {#if isDark}
 <App theme={osTheme} dark safeAreas>
+  <!-- <PageTransition {pathname}> -->
     <slot />
+  <!-- </PageTransition> -->
 </App>
 {:else}
 <App theme={osTheme} safeAreas>
+  <!-- <PageTransition {pathname}> -->
   <slot />
+<!-- </PageTransition> -->
 </App>
 {/if}
