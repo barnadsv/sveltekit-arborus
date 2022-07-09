@@ -1,4 +1,3 @@
-<!-- PageTransition.svelte -->
 <script>
     import { fly } from 'svelte/transition'
     export let pathname = ''

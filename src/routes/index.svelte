@@ -20,6 +20,18 @@
         }
     }
 
+    const setIos = (e: Event) => {
+        themeStore.set({ ...$themeStore, os: 'ios' })
+    }
+
+    const setAndroid = (e: Event) => {
+        themeStore.set({ ...$themeStore, os: 'material' })
+    }
+
+    const setParent = (e: Event) => {
+        themeStore.set({ ...$themeStore, os: 'parent' })
+    }
+
 </script>
 
 <Page>
@@ -36,8 +48,15 @@
             <ListButton onClick={setDark}>Dark</ListButton>
             <ListButton onClick={setSystem}>System</ListButton>
         </List>
-        <button class="mt-2 btn" on:click={setLight}>Light</button>
-        <button class="mt-2 btn" on:click={setDark}>Dark</button>
-        <button class="mt-2 btn" on:click={setSystem}>System</button>
+        <div>
+            <button class="mt-2 btn" on:click={setLight}>Light</button>
+            <button class="mt-2 btn" on:click={setDark}>Dark</button>
+            <button class="mt-2 btn" on:click={setSystem}>System</button>
+        </div>
+        <div>
+            <button class="mt-2 btn" on:click={setIos}>iOS</button>
+            <button class="mt-2 btn" on:click={setAndroid}>Material</button>
+            <button class="mt-2 btn" on:click={setParent}>Parent</button>
+        </div>
     </Block>
 </Page>

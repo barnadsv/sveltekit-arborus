@@ -5,6 +5,7 @@
     
     let theme = ''
     
+    $: semNavbarArborus = $navbarStore.semNavbarArborus
     $: title = $navbarStore.title
     $: temProgress = $navbarStore.temProgress
     $: progress = $navbarStore.progress
@@ -36,7 +37,9 @@
         <div class="camera"></div> 
         <div class="display">
         <div class="artboard artboard-demo phone-7">
+            {#if !semNavbarArborus}
             <NavBarArborus {temProgress} {progress} {title} {voltar} />
+            {/if}
             <div class="flex flex-col justify-between p-2 h-full w-full">
                 <slot />
             </div>

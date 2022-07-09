@@ -5,6 +5,7 @@
     import { navbarStore } from '$lib/stores/navbarStore'
 
     navbarStore.set({
+        semNavbarArborus: false,
         temProgress: true,
         progress: 0,
         title: 'Informações Pessoais',

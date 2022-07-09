@@ -8,15 +8,17 @@
 
 <script lang="ts">
     import { onMount } from 'svelte'
-    // import PageTransition from '$lib/components/PageTransition.svelte'
+    import PageTransition from '$lib/components/PageTransition.svelte'
     import '../app.css'
     import { App } from 'konsta/svelte'
     import { themeStore } from '$lib/stores/themeStore'
     
-    let osTheme: "material" | "ios" | "parent" | undefined = 'ios' // TODO: Detectar o dispositivo e definir o tema aqui, muito provavelmente utilizando store...
+    // let osTheme: "material" | "ios" | "parent" | undefined = 'ios' // TODO: Detectar o dispositivo e definir o tema aqui, muito provavelmente utilizando store...
+    let osTheme: "material" | "ios" | "parent" | undefined = $themeStore.os // TODO: Detectar o dispositivo e definir o tema aqui, muito provavelmente utilizando store...
+
 
     export let localDarkTheme: string
-    // export let pathname: string
+    export let pathname: string
 
     let htmlElement: HTMLElement
     
@@ -83,14 +85,14 @@
 
 {#if isDark}
 <App theme={osTheme} dark safeAreas>
-  <!-- <PageTransition {pathname}> -->
+  <PageTransition {pathname}>
     <slot />
-  <!-- </PageTransition> -->
+  </PageTransition>
 </App>
 {:else}
 <App theme={osTheme} safeAreas>
-  <!-- <PageTransition {pathname}> -->
+  <PageTransition {pathname}>
   <slot />
-<!-- </PageTransition> -->
+</PageTransition>
 </App>
 {/if}
